@@ -28,7 +28,7 @@ def grafico_boxplot(coluna_num, coluna_cat, df):
     boxplot = alt.Chart(df, width=600).mark_boxplot().encode(
         x=coluna_num,
         y=coluna_cat
-    )
+    ).interactive()
     return boxplot
 
 #ScaterPlot
@@ -68,7 +68,7 @@ def matriz_correlacao(numero):
     corr = numero[var_corr].corr(method=corr_metodo[0].lower() + corr_metodo[1:])
     st.markdown('**Tabela de Correlação**')
     st.write(corr)
-    st.markdown('**Matriz de Correlação')
+    st.markdown('**Matriz de Correlação**')
     st.write('Para grande bases de dados a matriz de correlação pode ser mais adequada')
     sns.heatmap(corr, fmt='.2f', square=True, annot=True)
     st.pyplot()
@@ -170,9 +170,7 @@ def main():
         st.write('A estatística descritiva bivariada/multivariada diz respeito ao relacionamento entre os '
                  'pares ou conjunto de variáveis como um todo.')
 
-
         matriz_correlacao(df[colunas_numericas])
-
 
         st.markdown('**Visualizações dos dados**')
 
@@ -181,8 +179,9 @@ def main():
 
         histograma = st.checkbox('Histograma')
         if histograma:
-            col_num = st.selectbox('Selecione a Coluna Numérica', colunas_numericas[1:], key='unique')
+            col_num = st.selectbox('Selecione a Coluna Numérica', colunas_numericas[1:])
             st.markdown('Histograma da coluna: ' + str(col_num))
+            st.write(grafico_histograma(col_num,df))
             st.write('O histograma é a distribuição de frequências  de uma amostra de forma gráfica.Quando o volume de '
                      'dados aumenta indefinidamente dentro do conjunto de dados e o intervalo de classes tende a zero (o'
                      ' que torna os retângulos cada vez mais finos e altos), a distribuição de frequência torna–se uma '
@@ -191,26 +190,26 @@ def main():
 
         barras = st.checkbox('Gráfico de Barras')
         if barras:
-            col_num_barras = st.selectbox('Selecione a Coluna Numérica', colunas_numericas[1:], key='unique')
-            col_cat_barras = st.selectbox('Selecione uma Coluna Categórica', colunas_object[1:], key='unique')
+            col_num_barras = st.selectbox('Selecione a Coluna Numérica', colunas_numericas[1:])
+            col_cat_barras = st.selectbox('Selecione uma Coluna Categórica', colunas_object)
             st.write(grafico_barras(col_num_barras, col_cat_barras, df))
             st.write('O gráfico de barras  gráfico de barras é utilizado para realizar comparações entre as categorias '
                      'de uma variável qualitativa ou quantitativa discreta')
 
         boxplot = st.checkbox('Boxplot')
         if boxplot:
-            col_num_barras = st.selectbox('Selecione a Coluna Numérica', colunas_numericas[1:], key='unique')
-            col_cat_barras = st.selectbox('Selecione a uma Coluna Categórica', colunas_object[1:], key='unique')
-            st.write(grafico_boxplot(col_num_barras, col_cat_barras, df))
+            col_num_boxplot = st.selectbox('Selecione a Coluna Numérica', colunas_numericas[1:])
+            col_cat_boxplot = st.selectbox('Selecione a uma Coluna Categórica', colunas_object[1:])
+            st.write(grafico_boxplot(col_num_boxplot, col_cat_boxplot, df))
             st.write('Representa a variação de dados observados de uma variável numérica por meio de quartis. Os outliers'
                      'ficam como pontos individuais')
 
 
         scatter = st.checkbox('ScatterPlot')
         if scatter:
-            col_num_barras = st.selectbox('Selecione a Coluna Numérica', colunas_numericas[1:], key='unique')
-            col_cat_barras = st.selectbox('Selecione a uma Coluna Categórica', colunas_object[1:], key='unique')
-            st.write(grafico_scatterplot(col_num_barras, col_cat_barras, df))
+            col_num_checkbox = st.selectbox('Selecione a Coluna Numérica', colunas_numericas[1:])
+            col_cat_checkbox = st.selectbox('Selecione a uma Coluna Categórica', colunas_object[1:])
+            st.write(grafico_scatterplot(col_num_checkbox, col_cat_checkbox, df))
             st.write('O gráfico de dispersão utiliza coordenadas cartesianas para exibir valores de um conjunto de dados.'
                      'Cada ponto é o valor de uma variável')
 
