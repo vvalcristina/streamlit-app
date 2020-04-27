@@ -43,7 +43,6 @@ def grafico_scatterplot(x, y, df):
 
 #Correlacao
 def matriz_correlacao(numero):
-    st.markdown('**Correlação**')
     st.write('A [correlação](https://medium.com/brdata/correla%C3%A7%C3%A3o-direto-ao-ponto-9ec1d48735fb) é uma análise descritiva que mede se há e qual o grau de dependência entre duas variáveis')
 
     st.markdown('**Correlação de Pearson:** Também chamado de “coeficiente de correlação produto-momento” ou simplesmente '
@@ -121,12 +120,12 @@ def main():
 
         st.subheader('**Estatística Descritiva Univariada**')
         st.write(' A Estatística Univariada inclui todos os métodos de Estatística Descritiva e '
-                 'da Estatística Inferencial que permitem a análise de uma determinada variável ')
-        st.write('A estatística descritiva diz respeito as variáveis numéricas')
-        col = st.selectbox('Selecione a coluna: ', colunas_numericas[1:])
+                 'da Estatística Inferencial que permitem a análise de uma determinada variável. '
+                 'A estatística descritiva diz respeito as variáveis numéricas.')
+        col = st.selectbox('Selecione a coluna que deseja analisar: ', colunas_numericas[1:])
 
         if col is not None:
-            st.markdown('Selecione o que deseja analisar: ')
+            st.markdown('Selecione uma análise: ')
             mean = st.checkbox('Média')
             if mean:
                 st.markdown(df[col].mean().round(2))
@@ -143,7 +142,7 @@ def main():
                 st.markdown(df[col].std().round(2))
                 st.write('O desvio padrão é uma medida que expressa o grau de dispersão de um conjunto de dados, '
                          'ou seja, indica um quanto um conjunto de dados é uniforme. Quanto mais próximo de zero'
-                         'mais uniforme o conjunto de dados')
+                         'mais uniforme o conjunto de dados.')
             kurtosis = st.checkbox('Kurtosis')
             if kurtosis:
                 st.markdown(df[col].kurtosis().round(5))
@@ -172,6 +171,8 @@ def main():
         st.write('A estatística descritiva bivariada/multivariada diz respeito ao relacionamento entre os '
                  'pares ou conjunto de variáveis como um todo.')
 
+        st.markdown('**Correlação**')
+
         correlacao = st.checkbox('Correlação')
         if correlacao:
             matriz_correlacao(df[colunas_numericas])
@@ -181,41 +182,42 @@ def main():
         st.write('Aqui temos alguns exemplos mais comuns de visualização dos dados de forma gráfica. A melhor forma de'
                  'visualização depende muito dos tipos de dados analisados.')
 
-        graficos =st.radio('Escolha a opção de visualização:',('Histograma','Gráfico de Barras', 'BoxPlot', 'ScatterPlot'))
+        graficos =st.radio('Escolha uma opção de visualização:',('Histograma','Gráfico de Barras', 'BoxPlot', 'ScatterPlot'))
 
         if graficos == 'Histograma':
-            st.markdown('Histograma')
-            col_num = st.selectbox('Selecione a Coluna Numérica', colunas_numericas[1:])
-            st.markdown('Histograma da coluna: ' + str(col_num))
-            st.write(grafico_histograma(col_num,df))
+            st.markdown('**Histograma**')
             st.write('O histograma é a distribuição de frequências  de uma amostra de forma gráfica.Quando o volume de '
                      'dados aumenta indefinidamente dentro do conjunto de dados e o intervalo de classes tende a zero (o'
                      ' que torna os retângulos cada vez mais finos e altos), a distribuição de frequência torna–se uma '
-                     'distribuição de densidade de probabilidades ')
+                     'distribuição de densidade de probabilidades. ')
+            col_num = st.selectbox('Selecione a Coluna Numérica', colunas_numericas[1:])
+            st.markdown('Histograma da coluna: ' + str(col_num))
+            st.write(grafico_histograma(col_num,df))
 
         if graficos == 'Gráfico de Barras':
-            st.markdown('Gráfico de Barras')
+            st.markdown('**Gráfico de Barras**')
+            st.write('O gráfico de barras  gráfico de barras é utilizado para realizar comparações entre as categorias '
+                     'de uma variável qualitativa ou quantitativa discreta.')
             col_num_barras = st.selectbox('Selecione a Coluna Numérica', colunas_numericas[1:])
             col_cat_barras = st.selectbox('Selecione uma Coluna Categórica', colunas_object[1:])
             st.write(grafico_barras(col_num_barras, col_cat_barras, df))
-            st.write('O gráfico de barras  gráfico de barras é utilizado para realizar comparações entre as categorias '
-                     'de uma variável qualitativa ou quantitativa discreta')
 
         if graficos == 'BoxPlot':
-            st.markdown('BoxPlot')
+            st.markdown('**BoxPlot**')
+            st.write('Representa a variação de dados observados de uma variável numérica por meio de quartis. Os outliers'
+                     'ficam como pontos individuais.')
             col_num_boxplot = st.selectbox('Selecione a Coluna Numérica', colunas_numericas[1:])
             col_cat_boxplot = st.selectbox('Selecione a uma Coluna Categórica', colunas_object[1:])
             st.write(grafico_boxplot(col_num_boxplot, col_cat_boxplot, df))
-            st.write('Representa a variação de dados observados de uma variável numérica por meio de quartis. Os outliers'
-                     'ficam como pontos individuais')
 
         if graficos == 'ScatterPlot':
-            st.markdown('ScatterPlot')
+            st.markdown('**Gráfico de Dispersão**')
+            st.write('O gráfico de dispersão utiliza coordenadas cartesianas para exibir valores de um conjunto de dados.'
+                     'Cada ponto é o valor de uma variável.')
             col_num_checkbox = st.selectbox('Selecione a Coluna Numérica', colunas_numericas[1:])
             col_cat_checkbox = st.selectbox('Selecione a uma Coluna Categórica', colunas_object[1:])
             st.write(grafico_scatterplot(col_num_checkbox, col_cat_checkbox, df))
-            st.write('O gráfico de dispersão utiliza coordenadas cartesianas para exibir valores de um conjunto de dados.'
-                     'Cada ponto é o valor de uma variável')
+
 
     st.markdown('**Valéria Cristina Silva**')
 
