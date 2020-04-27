@@ -76,8 +76,8 @@ def matriz_correlacao(numero):
 
 def main():
     st.title('Análise Exploratória de Dados')
-    st.write('Esta página é dedicada ao desenvolvimento de uma aplicação de análise de dados'
-             'proposta pelo Prof. Tulio Vieira durante a Semana 3- do AceleraDev DataScience'
+    st.write('Esta página é dedicada ao desenvolvimento de uma aplicação de análise de dados '
+             'proposta pelo Prof. Tulio Vieira durante a Semana 3- do AceleraDev DataScience '
              'utilizando o framework de código aberto [Streamlit](https://www.streamlit.io/). ')
     st.image('logo.jpg', width=600)
     file = st.file_uploader('Faça upload da base de dados que deseja analisar (.csv)', type='csv')
