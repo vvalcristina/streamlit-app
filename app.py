@@ -97,8 +97,8 @@ def main():
         aux = pd.DataFrame({"colunas": df.columns, 'tipos': df.dtypes, 'NA #': df.isna().sum(),
                             'NA %': (df.isna().sum() / df.shape[0]) * 100})
         st.markdown('**Qualidade dos dados:** ')
-        st.write('A qualidade dos dados é de extrema importância para a análise. Verificar e tratar valores'
-                 'ausentes (nulos), assim como conhecer os tipos de dados analisados, é um dos primeiros passos'
+        st.write('A qualidade dos dados é de extrema importância para a análise. Verificar e tratar valores '
+                 'ausentes (nulos), assim como conhecer os tipos de dados analisados, é um dos primeiros passos '
                  'para uma análise consistente. ')
         st.write('Valores ausentes não tratados podem impactar na análise, podendo gerar conclusões equivocadas.')
 
@@ -183,7 +183,7 @@ def main():
             st.write('O histograma é a distribuição de frequências  de uma amostra de forma gráfica.Quando o volume de '
                      'dados aumenta indefinidamente dentro do conjunto de dados e o intervalo de classes tende a zero (o'
                      ' que torna os retângulos cada vez mais finos e altos), a distribuição de frequência torna–se uma '
-                     'distribuição de densidade de probabilidades')
+                     'distribuição de densidade de probabilidades ')
 
 
         barras = st.checkbox('Gráfico de Barras')
