@@ -94,13 +94,14 @@ def main():
 
         # Criando um DataFrame auxiliar(aux) para a análise dos dados
         #Esse dataframe retorna as colunas, os tipos de cada variável e a soma e porcentagem dos dados faltantes
-        aux = pd.DataFrame({"colunas": df.columns, 'tipos': df.dtypes, 'NA #': df.isna().sum(),
-                            'NA %': (df.isna().sum() / df.shape[0]) * 100})
+        aux = pd.DataFrame({"colunas": df.columns, 'tipos': df.dtypes, 'Nulos #': df.isna().sum(),
+                            'Nulos %': (df.isna().sum() / df.shape[0]) * 100})
         st.markdown('**Qualidade dos dados:** ')
         st.write('A qualidade dos dados é de extrema importância para a análise. Verificar e tratar valores '
                  'ausentes (nulos), assim como conhecer os tipos de dados analisados, é um dos primeiros passos '
                  'para uma análise consistente. ')
         st.write('Valores ausentes não tratados podem impactar na análise, podendo gerar conclusões equivocadas.')
+        st.write(aux)
 
         # Separando as variáveis numéricas e as variáveis categóricas
         st.markdown('**Variáveis numéricas: **')
