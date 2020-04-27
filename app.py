@@ -112,7 +112,7 @@ def main():
         colunas_numericas = list(aux[aux['tipos'] != 'object']['colunas'])
         st.table(colunas_numericas)
 
-        st.markdown('**Variáveis Categóricas:')
+        st.markdown('**Variáveis Categóricas:**')
         st.write('As variáveis categóricas dizem respeito as variáveis qualitativas que podem ser medidas em '
                  'várias categorias, podendo ser nominais ou ordinais')
         colunas_object = list(aux[aux['tipos'] == 'object']['colunas'])
