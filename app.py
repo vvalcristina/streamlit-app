@@ -212,8 +212,14 @@ def main():
             st.write('O gráfico de dispersão utiliza coordenadas cartesianas para exibir valores de um conjunto de dados.'
                      'Cada ponto é o valor de uma variável')
     st.markdown('**Valéria Cristina Silva**')
-    st.write('[Github](https://github.com/vvalcristina/streamlit-app)')
-    st.write('[Linkedin](https://www.linkedin.com/in/valeria-cristina/)')
+
+    st.sidebar.subheader('Sobre mim:')
+    st.sidebar.image('image.jpeg', width=150)
+    st.sidebar.markdown('**Valéria Cristina Silva**')
+    st.sidebar.markdown('Mestre em Sistemas de Infraestrutura Urbana e Engenheira de Telecomunicações  pela PUC-Campinas. '
+                        '*Software Development*')
+    st.sidebar.markdown('[Linkedin](https://www.linkedin.com/in/valeria-cristina/)')
+    st.sidebar.markdown('[Github](https://github.com/vvalcristina/streamlit-app)')
 
 if __name__ == '__main__':
     main()
