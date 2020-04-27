@@ -81,9 +81,7 @@ def main():
              'utilizando o framework de código aberto [Streamlit](https://www.streamlit.io/). ')
     st.image('logo.jpg', width=600)
     file = st.file_uploader('Faça upload da base de dados que deseja analisar (.csv)', type='csv')
-    st.markdown('**Valéria Cristina Silva**')
-    st.write('[Github](https://github.com/vvalcristina/streamlit-app)')
-    st.write('[Linkedin](https://www.linkedin.com/in/valeria-cristina/)')
+
     if file is not None:
         df = pd.read_csv(file)
         st.subheader('**Conhecendo sua base de dados**')
@@ -212,7 +210,9 @@ def main():
             st.write(grafico_scatterplot(col_num_checkbox, col_cat_checkbox, df))
             st.write('O gráfico de dispersão utiliza coordenadas cartesianas para exibir valores de um conjunto de dados.'
                      'Cada ponto é o valor de uma variável')
-
+    st.markdown('**Valéria Cristina Silva**')
+    st.write('[Github](https://github.com/vvalcristina/streamlit-app)')
+    st.write('[Linkedin](https://www.linkedin.com/in/valeria-cristina/)')
 
 if __name__ == '__main__':
     main()
