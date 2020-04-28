@@ -44,31 +44,30 @@ def grafico_scatterplot(x, y, df):
 #Correlacao
 def matriz_correlacao(numero):
     st.write('A [correlação](https://medium.com/brdata/correla%C3%A7%C3%A3o-direto-ao-ponto-9ec1d48735fb) é uma análise descritiva que mede se há e qual o grau de dependência entre duas variáveis')
-
-    st.markdown('**Correlação de Pearson:** Também chamado de “coeficiente de correlação produto-momento” ou simplesmente '
-                'de “ρ de Pearson” mede o grau da correlação (e a direção dessa correlação — se positiva ou negativa) entre '
-                'duas variáveis. Este coeficiente, normalmente representado por ρ assume apenas valores entre -1 e 1.')
-
-    st.markdown('**Correlação de Spearman:** Indicado para o cálculo da correlação entre variáveis aleatórias x e y '
-                'relacionadas monotonicamente entre si, mas não necessariamente de maneira linear. Se a relação é linear '
-                'o método de Pearson é o mais indicado.')
-
-    st.markdown('**Correlação de Kendall:** É uma medida de correlação de postos, ou seja, verifica a semelhança entre'
-                ' as ordens dos dados quando classificados por cada uma das quantidades.')
-
     st.markdown('O tipo de correlação mais adequado pra cada situação varia de acordo com o problema.')
-
     var_corr = st.multiselect('Selecione as variáveis:', list(numero.columns), default=list(numero.columns))
-
     corr_metodo = st.radio('Selecione o método de correlação', ('Pearson','Spearman','Kendall'))
-
     if(var_corr) == 0:
         var_corr = list(numero)
     corr = numero[var_corr].corr(method=corr_metodo[0].lower() + corr_metodo[1:])
+    if corr_metodo == 'Pearson':
+        st.markdown('**Correlação de Pearson:** Também chamado de “coeficiente de correlação produto-momento” ou simplesmente '
+                    'de “ρ de Pearson” mede o grau da correlação (e a direção dessa correlação — se positiva ou negativa) entre '
+                    'duas variáveis. Este coeficiente, normalmente representado por ρ assume apenas valores entre -1 e 1.')
+    if corr_metodo == 'Spearman':
+         st.markdown('**Correlação de Spearman:** Indicado para o cálculo da correlação entre variáveis aleatórias x e y '
+                     'relacionadas monotonicamente entre si, mas não necessariamente de maneira linear. Se a relação é linear '
+                       'o método de Pearson é o mais indicado.')
+    if corr_metodo == 'Kendall':
+        st.markdown('**Correlação de Kendall:** É uma medida de correlação de postos, ou seja, verifica a semelhança entre'
+                    ' as ordens dos dados quando classificados por cada uma das quantidades.')
+
     st.markdown('**Tabela de Correlação**')
+    st.write('A tabela de correlação nos mostra a correlação entre as variáveis selecionadas. É muito interessante'
+             'quando se deseja correlacionar poucas variáveis entre si.')
     st.write(corr)
     st.markdown('**Matriz de Correlação**')
-    st.write('Para grande bases de dados a matriz de correlação pode ser mais adequada')
+    st.write('Para grande bases de dados a matriz de correlação pode ser mais adequada.')
     sns.heatmap(corr, fmt='.2f', square=True, annot=True)
     st.pyplot()
 
@@ -92,14 +91,14 @@ def main():
 
         # Criando um DataFrame auxiliar(aux) para a análise dos dados
         #Esse dataframe retorna as colunas, os tipos de cada variável e a soma e porcentagem dos dados faltantes
-        aux = pd.DataFrame({"colunas": df.columns, 'tipos': df.dtypes, 'Nulos #': df.isna().sum(),
+        aux = pd.DataFrame({"colunas": df.columns, 'Tipos': df.dtypes, 'Nulos #': df.isna().sum(),
                             'Nulos %': (df.isna().sum() / df.shape[0]) * 100})
         st.markdown('**Qualidade dos dados:** ')
         st.write('A qualidade dos dados é de extrema importância para a análise. Verificar e tratar valores '
                  'ausentes (nulos), assim como conhecer os tipos de dados analisados, é um dos primeiros passos '
                  'para uma análise consistente. ')
         st.write('Valores ausentes não tratados podem impactar na análise, podendo gerar conclusões equivocadas.')
-        ausentes= pd.DataFrame({'tipos': df.dtypes, 'Nulos (Total)': df.isna().sum(),'Nulos(%)': (df.isna().sum() / df.shape[0]) * 100})
+        ausentes= pd.DataFrame({'Tipos': df.dtypes, 'Nulos (Total)': df.isna().sum(),'Nulos(%)': (df.isna().sum() / df.shape[0]) * 100})
         st.write(ausentes)
 
         # Separando as variáveis numéricas e as variáveis categóricas
@@ -107,13 +106,13 @@ def main():
         st.write('As variáveis numéricas são as variáveis que podem ser medidas numa escala quantitativa,'
                  'ou seja, apresentam valores numéricos que fazem sentido. Podem ser mensuradas através da '
                  'média, desvio padrão, valores máximos e mínimos por exemplo ')
-        colunas_numericas = list(aux[aux['tipos'] != 'object']['colunas'])
+        colunas_numericas = list(aux[aux['Tipos'] != 'object']['colunas'])
         st.table(colunas_numericas)
 
         st.markdown('**Variáveis Categóricas:**')
         st.write('As variáveis categóricas dizem respeito as variáveis qualitativas que podem ser medidas em '
                  'várias categorias, podendo ser nominais ou ordinais')
-        colunas_object = list(aux[aux['tipos'] == 'object']['colunas'])
+        colunas_object = list(aux[aux['Tipos'] == 'object']['colunas'])
         st.table(colunas_object)
 
         colunas = list(df.columns)
@@ -173,14 +172,12 @@ def main():
 
         st.markdown('**Correlação**')
 
-        correlacao = st.checkbox('Correlação')
-        if correlacao:
-            matriz_correlacao(df[colunas_numericas])
+        matriz_correlacao(df[colunas_numericas])
 
         st.markdown('**Visualizações dos dados**')
 
         st.write('Aqui temos alguns exemplos mais comuns de visualização dos dados de forma gráfica. A melhor forma de'
-                 'visualização depende muito dos tipos de dados analisados.')
+                 ' visualização depende muito dos tipos de dados analisados.')
 
         graficos =st.radio('Escolha uma opção de visualização:',('Histograma','Gráfico de Barras', 'BoxPlot', 'ScatterPlot'))
 
@@ -200,14 +197,16 @@ def main():
                      'de uma variável qualitativa ou quantitativa discreta.')
             col_num_barras = st.selectbox('Selecione a Coluna Numérica', colunas_numericas[1:])
             col_cat_barras = st.selectbox('Selecione uma Coluna Categórica', colunas_object[1:])
+            st.markdown('Grádfco de barras da coluna: ' + str(col_num_barras) + 'pela coluna' +str(col_cat_barras)+ '.')
             st.write(grafico_barras(col_num_barras, col_cat_barras, df))
 
         if graficos == 'BoxPlot':
             st.markdown('**BoxPlot**')
-            st.write('Representa a variação de dados observados de uma variável numérica por meio de quartis. Os outliers'
+            st.write('Representa a variação de dados observados de uma variável numérica por meio de quartis. Os outliers '
                      'ficam como pontos individuais.')
             col_num_boxplot = st.selectbox('Selecione a Coluna Numérica', colunas_numericas[1:])
             col_cat_boxplot = st.selectbox('Selecione a uma Coluna Categórica', colunas_object[1:])
+            st.markdown('BoxPlot da coluna: ' + str(col_num_boxplot) + 'pela coluna' +str(col_cat_boxplot)+ '.')
             st.write(grafico_boxplot(col_num_boxplot, col_cat_boxplot, df))
 
         if graficos == 'ScatterPlot':
@@ -216,6 +215,7 @@ def main():
                      'Cada ponto é o valor de uma variável.')
             col_num_checkbox = st.selectbox('Selecione a Coluna Numérica', colunas_numericas[1:])
             col_cat_checkbox = st.selectbox('Selecione a uma Coluna Categórica', colunas_object[1:])
+            st.markdown('Gráfico de dispersão da coluna: ' + str(col_num_checkbox) + 'pela coluna' +str(col_cat_checkbox)+ '.')
             st.write(grafico_scatterplot(col_num_checkbox, col_cat_checkbox, df))
 
 
