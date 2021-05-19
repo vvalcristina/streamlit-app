@@ -1,7 +1,35 @@
-# **Streamlit App Data Science Codenation**
+# **Streamlit App Análise de Dados**
 
-Acesse o deploy do [StreamLit](https://streamlit-app-codenation.herokuapp.com/).
+Este código tem como objetivo fornecer uma análise exploratória de datasets no formato .csv.
+A aplicação utiliza o [Streamlit](https://docs.streamlit.io/en/stable/) e o deploy foi feito no [Heroku](https://devcenter.heroku.com/categories/reference).
+
+Acesse o demo do código [aqui](https://streamlit-app-codenation.herokuapp.com/).
+
+![Captura de tela de 2021-05-18 21-03-13](https://user-images.githubusercontent.com/52939036/118738064-867f0b00-b81c-11eb-9fbf-122fdd07c5b4.png)
 
 
-![Captura de tela 2020-04-26 21:06:42](https://user-images.githubusercontent.com/52939036/80323557-891e5500-8802-11ea-82d2-2bb87781d026.png)
 
+#### Setup
+
+* Clone esse repositório:
+
+```bash
+    git clone https://github.com/vvalcristina/streamlit-app.git
+```
+* Crie a virtualenv:
+
+```bash
+    virtualenv venv
+    source venv/bin/activate
+```
+* Instale as dependências:
+
+```bash
+   pip install -r requirements.txt
+```
+
+* Para buildar o código localmente:
+
+```bash
+   streamlit run app.py
+```

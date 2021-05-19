@@ -76,7 +76,7 @@ def main():
     st.write('Esta página é dedicada ao desenvolvimento de uma aplicação de análise de dados '
              'proposta pelo Prof. Tulio Vieira durante a Semana 3- do AceleraDev DataScience '
              'utilizando o framework de código aberto [Streamlit](https://www.streamlit.io/). ')
-    st.image('logo.jpg', width=600)
+    st.image('logo.jpg', width=800)
     file = st.file_uploader('Faça upload da base de dados que deseja analisar (.csv)', type='csv')
 
     if file is not None:
@@ -225,7 +225,7 @@ def main():
     st.sidebar.image('image.jpeg', width=150)
     st.sidebar.markdown('**Valéria Cristina Silva**')
     st.sidebar.markdown('Mestre em Sistemas de Infraestrutura Urbana e Engenheira de Telecomunicações  pela PUC-Campinas. '
-                        '*Software Development*')
+                        '*Engenheira de Dados na Dextra Digital*')
     st.sidebar.markdown('[Linkedin](https://www.linkedin.com/in/valeria-cristina/)')
     st.sidebar.markdown('[Github](https://github.com/vvalcristina/streamlit-app)')
 
