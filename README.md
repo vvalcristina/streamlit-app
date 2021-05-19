@@ -1,9 +1,9 @@
 # **Streamlit App Análise de Dados**
 
 Este código tem como objetivo fornecer uma análise exploratória de datasets no formato .csv.
-A aplicação utiliza o [Streamlit] e o deploy foi feito no [Heroku].
+A aplicação utiliza o [Streamlit](https://docs.streamlit.io/en/stable/) e o deploy foi feito no [Heroku](https://devcenter.heroku.com/categories/reference).
 
-Acesse o demo do código [aqui].
+Acesse o demo do código [aqui](https://streamlit-app-codenation.herokuapp.com/).
 
 ![Captura de tela de 2021-05-18 21-03-13](https://user-images.githubusercontent.com/52939036/118738064-867f0b00-b81c-11eb-9fbf-122fdd07c5b4.png)
 
@@ -33,7 +33,3 @@ Acesse o demo do código [aqui].
 ```bash
    streamlit run app.py
 ```
-
-[Streamlit]: (https://docs.streamlit.io/en/stable/)
-[Heroku]: (https://devcenter.heroku.com/categories/reference)
-[aqui]:(https://streamlit-app-codenation.herokuapp.com/)
